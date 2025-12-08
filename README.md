@@ -44,7 +44,7 @@ StreamNotifier follows a **microservices architecture** pattern with clear separ
 
 ```
 ┌─────────────┐         ┌──────────────────┐         ┌─────────────┐
-│   Telegram  │ ──────> │ Telegram Adapter │ ──────> │ Core Service│
+│   Telegram  │ ──────> │ Telegram Bot     │ ──────> │ Core Service│
 │     User    │ <────── │   (Stateless)    │ <────── │ (REST API)  │
 └─────────────┘         └──────────────────┘         └─────────────┘
                                                              │
@@ -63,7 +63,7 @@ StreamNotifier follows a **microservices architecture** pattern with clear separ
    - PostgreSQL database with Flyway migrations
    - Built with Spring Boot 3.4 and Java 21
 
-2. **Telegram Adapter** (`/telegram-adapter`)
+2. **Telegram Bot** (`/telegram-bot`)
    - Stateless interface layer for Telegram bot
    - Translates user commands to Core API calls
    - Built with Python 3.11+ and aiogram 3.x
@@ -91,7 +91,7 @@ StreamNotifier follows a **microservices architecture** pattern with clear separ
   - SpringDoc OpenAPI (API documentation)
   - Testcontainers (Integration testing)
 
-### Telegram Adapter
+### Telegram Botls
 
 - **Language**: Python 3.11+
 - **Framework**: aiogram 3.x
@@ -170,7 +170,7 @@ content-notify/
 │   │   │       └── application.properties
 │   │   └── test/              # Unit & Integration tests
 │   └── pom.xml
-├── telegram-adapter/          # Python Telegram Bot
+├── telegram-bot/          # Python Telegram Bot
 ├── infrastructure/            # Docker & deployment configs
 │   ├── docker-compose.yml
 │   ├── .env.example

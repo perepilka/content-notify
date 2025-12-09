@@ -2,6 +2,8 @@ package com.perepilka.coreservice.repository;
 
 import com.perepilka.coreservice.domain.Subscription;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -47,4 +49,19 @@ public interface SubscriptionRepository extends JpaRepository<Subscription, Long
      * @param accountId the account UUID
      */
     void deleteByIdAndAccountId(Long id, UUID accountId);
+
+    /**
+     * Find all subscriptions for a specific channel URL.
+     * Used for notifications when a channel goes live (FR-CORE-05).
+     * 
+     * Uses JOIN FETCH to eagerly load associated Account data
+     * to avoid N+1 query issues when sending notifications to multiple users.
+     *
+     * @param channelUrl the channel URL to search for
+     * @return list of subscriptions with eagerly loaded relationships
+     */
+    @Query("SELECT s FROM Subscription s " +
+           "JOIN FETCH s.account " +
+           "WHERE s.channelUrl = :channelUrl")
+    List<Subscription> findAllByChannelUrl(@Param("channelUrl") String channelUrl);
 }

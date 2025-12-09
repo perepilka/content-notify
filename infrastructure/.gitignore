@@ -1,0 +1,13 @@
+# Environment files (CRITICAL - Never commit secrets!)
+.env
+
+# Logs
+*.log
+logs/
+
+# Docker volumes data
+postgres_data/
+
+# OS
+.DS_Store
+Thumbs.db

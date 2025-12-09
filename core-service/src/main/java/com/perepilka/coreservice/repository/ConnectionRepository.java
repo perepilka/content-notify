@@ -29,4 +29,13 @@ public interface ConnectionRepository extends JpaRepository<Connection, Long> {
      * @return true if connection exists, false otherwise
      */
     boolean existsByProviderAndProviderId(Provider provider, String providerId);
+
+    /**
+     * Find a connection by account ID and provider.
+     *
+     * @param accountId the account UUID
+     * @param provider the provider type (e.g., TELEGRAM)
+     * @return Optional containing the connection if found
+     */
+    Optional<Connection> findByAccountIdAndProvider(UUID accountId, Provider provider);
 }
